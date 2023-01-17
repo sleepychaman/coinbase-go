@@ -9,6 +9,10 @@ type RequestForGetProduct struct {
 }
 
 type ResponseForGetProduct struct {
+	Product
+}
+
+type Product struct {
 	ProductID                 string `json:"product_id"`
 	Price                     string `json:"price"`
 	PricePercentageChange24H  string `json:"price_percentage_change_24h"`
@@ -36,8 +40,6 @@ type ResponseForGetProduct struct {
 	BaseCurrencyID            string `json:"base_currency_id"`
 	MidMarketPrice            string `json:"mid_market_price"`
 }
-
-type Product struct{}
 
 func (req *RequestForGetProduct) Path() string {
 	return "/api/v3/brokerage/products/" + req.ProductID

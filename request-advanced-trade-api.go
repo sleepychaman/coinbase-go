@@ -1,9 +1,9 @@
-package rest
+package coinbasego
 
 import (
-	"github.com/sleepychaman/coinbase-go/rest/advanded-trade-api/account"
-	"github.com/sleepychaman/coinbase-go/rest/advanded-trade-api/order"
-	"github.com/sleepychaman/coinbase-go/rest/advanded-trade-api/products"
+	"github.com/sleepychaman/coinbase-go/advanded-trade-api/account"
+	"github.com/sleepychaman/coinbase-go/advanded-trade-api/order"
+	"github.com/sleepychaman/coinbase-go/advanded-trade-api/products"
 )
 
 func (p *Client) ListAccounts(req *account.RequestForListAccounts) (*account.ResponseForListAccounts, error) {
