@@ -4,13 +4,16 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/sleepychaman/coinbase-go/rest/generic"
+	"github.com/google/go-querystring/query"
+	"github.com/sleepychaman/coinbase-go/generic"
 )
 
-type RequestForListAccounts struct{}
+type RequestForListAccounts struct {
+	generic.AdvancedTradePaginationRequest
+}
 
 type ResponseForListAccounts struct {
-	generic.Pagination
+	generic.AdvancedTradePaginationResponse
 	Accounts []Account `json:"accounts"`
 }
 
@@ -32,6 +35,7 @@ type AccountType string
 
 const (
 	ACCOUNT_TYPE_CRYPTO AccountType = "ACCOUNT_TYPE_CRYPTO"
+	ACCOUNT_TYPE_FIAT   AccountType = "ACCOUNT_TYPE_FIAT"
 )
 
 type Balance struct {
@@ -48,7 +52,8 @@ func (req *RequestForListAccounts) Method() string {
 }
 
 func (req *RequestForListAccounts) Query() string {
-	return ""
+	value, _ := query.Values(req)
+	return value.Encode()
 }
 
 func (req *RequestForListAccounts) Payload() []byte {

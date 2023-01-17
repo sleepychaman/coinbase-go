@@ -1,4 +1,4 @@
-package rest
+package coinbasego
 
 type Requester interface {
 	Path() string

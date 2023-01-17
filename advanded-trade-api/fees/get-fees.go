@@ -4,7 +4,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/sleepychaman/coinbase-go/rest/advanded-trade-api/products"
+	"github.com/google/go-querystring/query"
+	"github.com/sleepychaman/coinbase-go/advanded-trade-api/products"
 )
 
 type RequestForListProducts struct {
@@ -52,7 +53,8 @@ func (req *RequestForListProducts) Method() string {
 }
 
 func (req *RequestForListProducts) Query() string {
-	return ""
+	value, _ := query.Values(req)
+	return value.Encode()
 }
 
 func (req *RequestForListProducts) Payload() []byte {

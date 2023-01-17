@@ -4,11 +4,12 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/sleepychaman/coinbase-go/rest/generic"
+	"github.com/google/go-querystring/query"
+	"github.com/sleepychaman/coinbase-go/generic"
 )
 
 type RequestForListFills struct {
-	generic.Pagination
+	generic.AdvancedTradePaginationRequest
 	OrderID                string    `url:"order_id"`
 	ProductID              string    `url:"product_id"`
 	StartSequenceTimestamp time.Time `url:"start_sequence_timestamp"`
@@ -16,7 +17,7 @@ type RequestForListFills struct {
 }
 
 type ResponseForListFills struct {
-	generic.Pagination
+	generic.AdvancedTradePaginationResponse
 	Fills []Fill `json:"fills"`
 }
 
@@ -63,7 +64,8 @@ func (req *RequestForListFills) Method() string {
 }
 
 func (req *RequestForListFills) Query() string {
-	return ""
+	value, _ := query.Values(req)
+	return value.Encode()
 }
 
 func (req *RequestForListFills) Payload() []byte {

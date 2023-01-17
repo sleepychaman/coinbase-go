@@ -2,9 +2,7 @@ package public
 
 import "net/http"
 
-type RequestForGetCurrencies struct {
-	CurrencyPair string
-}
+type RequestForGetCurrencies struct{}
 
 type ResponseForGetCurrencies struct {
 	Data []CurrencyInfo `json:"data"`

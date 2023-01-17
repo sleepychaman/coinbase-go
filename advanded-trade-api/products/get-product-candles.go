@@ -2,6 +2,8 @@ package products
 
 import (
 	"net/http"
+
+	"github.com/google/go-querystring/query"
 )
 
 type RequestForGetProductCandles struct {
@@ -47,7 +49,8 @@ func (req *RequestForGetProductCandles) Method() string {
 }
 
 func (req *RequestForGetProductCandles) Query() string {
-	return ""
+	value, _ := query.Values(req)
+	return value.Encode()
 }
 
 func (req *RequestForGetProductCandles) Payload() []byte {

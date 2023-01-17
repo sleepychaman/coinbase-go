@@ -2,6 +2,8 @@ package products
 
 import (
 	"net/http"
+
+	"github.com/google/go-querystring/query"
 )
 
 type RequestForListProducts struct {
@@ -30,7 +32,8 @@ func (req *RequestForListProducts) Method() string {
 }
 
 func (req *RequestForListProducts) Query() string {
-	return ""
+	value, _ := query.Values(req)
+	return value.Encode()
 }
 
 func (req *RequestForListProducts) Payload() []byte {
