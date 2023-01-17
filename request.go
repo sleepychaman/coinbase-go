@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -61,11 +62,12 @@ func (c *Client) do(r Requester) (*http.Response, error) {
 		return nil, err
 	}
 
-	data, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return nil, err
-	}
 	if res.StatusCode != 200 {
+		defer res.Body.Close()
+		data, err := io.ReadAll(res.Body)
+		if err != nil {
+			return nil, err
+		}
 		var r interface{}
 		if err := json.Unmarshal(data, &r); err != nil {
 			return nil, &generic.APIError{
@@ -86,6 +88,7 @@ func (c *Client) do(r Requester) (*http.Response, error) {
 }
 
 func decode(res *http.Response, out interface{}) error {
+	defer res.Body.Close()
 	data, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		return err
