@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-type RequestForListOrder struct {
+type RequestForListOrders struct {
 	ProductId            string                                `json:"product_id"`
 	OrderConfiguration   map[OrderTypeConfig]ConfigurationType `json:"order_configuration"`
 	OrderSide            OrderSide                             `json:"order_side"`
@@ -24,22 +24,22 @@ type RequestForListOrder struct {
 	TotalFees            string                                `json:"total_fees"`
 }
 
-type ResponseForListOrder struct {
+type ResponseForListOrders struct {
 	Orders []Order `json:"orders"`
 }
 
-func (req *RequestForListOrder) Path() string {
+func (req *RequestForListOrders) Path() string {
 	return "/api/v3/brokerage/orders/historical/batch/"
 }
 
-func (req *RequestForListOrder) Method() string {
+func (req *RequestForListOrders) Method() string {
 	return http.MethodGet
 }
 
-func (req *RequestForListOrder) Query() string {
+func (req *RequestForListOrders) Query() string {
 	return ""
 }
 
-func (req *RequestForListOrder) Payload() []byte {
+func (req *RequestForListOrders) Payload() []byte {
 	return nil
 }
