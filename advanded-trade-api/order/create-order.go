@@ -47,13 +47,13 @@ const (
 )
 
 type ConfigurationType struct {
-	QuoteSize     string    `json:"quote_size,omitempty"`
-	BaseSize      string    `json:"base_size,omitempty"`
-	LimitPrice    string    `json:"limit_price,omitempty"`
-	PostOnly      bool      `json:"post_only,omitempty"`
-	EndTime       time.Time `json:"end_time,omitempty"`
-	StopDirection string    `json:"stop_direction,omitempty"`
-	StopPrice     string    `json:"stop_price,omitempty"`
+	QuoteSize     string     `json:"quote_size,omitempty"`
+	BaseSize      string     `json:"base_size,omitempty"`
+	LimitPrice    string     `json:"limit_price,omitempty"`
+	PostOnly      bool       `json:"post_only,omitempty"`
+	EndTime       *time.Time `json:"end_time,omitempty"`
+	StopDirection string     `json:"stop_direction,omitempty"`
+	StopPrice     string     `json:"stop_price,omitempty"`
 }
 
 func (req *RequestForCreateOrder) Path() string {
